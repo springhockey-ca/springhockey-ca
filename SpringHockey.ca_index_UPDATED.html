@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SpringHockey.ca — Spring Hockey in Canada. Find teams, tournaments, camps, rinks and season information for Spring 2027.">
+  <title>SpringHockey.ca | Spring Hockey in Canada</title>
+  <style>
+    :root{
+      --navy:#102a43;
+      --blue:#1769aa;
+      --light:#f4f8fc;
+      --border:#dbe5ef;
+      --text:#243b53;
+      --muted:#627d98;
+      --white:#ffffff;
+      --accent:#e63946;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1180px,92%);margin:auto}
+    header{
+      background:var(--white);
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:20;
+    }
+    .nav{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+    }
+    .logo{
+      font-size:1.45rem;
+      font-weight:800;
+      color:var(--navy);
+    }
+    .logo span{color:var(--blue)}
+    nav{display:flex;gap:22px;flex-wrap:wrap}
+    nav a{font-weight:600;color:var(--text);font-size:.95rem}
+    nav a:hover{color:var(--blue)}
+    .hero{
+      background:linear-gradient(135deg,#eef6ff 0%,#fff 60%,#f5f9fc 100%);
+      padding:90px 0 70px;
+      border-bottom:1px solid var(--border);
+    }
+    .hero-content{max-width:850px}
+    .eyebrow{
+      display:inline-block;
+      color:var(--blue);
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:.82rem;
+      margin-bottom:14px;
+    }
+    h1{
+      color:var(--navy);
+      font-size:clamp(2.5rem,6vw,4.8rem);
+      line-height:1.05;
+      margin-bottom:20px;
+    }
+    .hero p{
+      font-size:1.18rem;
+      color:var(--muted);
+      max-width:760px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+      margin-top:40px;
+    }
+    .stat{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:20px 12px;
+      text-align:center;
+      box-shadow:0 5px 18px rgba(16,42,67,.05);
+    }
+    .stat strong{display:block;color:var(--navy);font-size:1.8rem}
+    .stat span{color:var(--muted);font-size:.9rem}
+    section{padding:72px 0}
+    section:nth-of-type(even){background:var(--light)}
+    .section-head{margin-bottom:32px}
+    .section-head h2{
+      color:var(--navy);
+      font-size:clamp(1.8rem,4vw,2.7rem);
+      margin-bottom:8px;
+    }
+    .section-head p{color:var(--muted);max-width:760px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:25px;
+      box-shadow:0 5px 18px rgba(16,42,67,.04);
+    }
+    .card h3{color:var(--navy);margin-bottom:10px}
+    .card p{color:var(--muted);font-size:.95rem}
+    .guide-list{margin:18px 0 0 20px;color:var(--text)}
+    .guide-list li{margin:8px 0}
+    .region-image{
+      width:100%;
+      height:190px;
+      object-fit:cover;
+      display:block;
+      border-radius:10px;
+      margin-bottom:18px;
+    }
+    .region-card{
+      border-left:5px solid var(--blue);
+    }
+    .region-card .province{
+      color:var(--blue);
+      font-size:.82rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .cities{color:var(--muted);font-size:.92rem;margin:10px 0 15px}
+    .link{color:var(--blue);font-weight:700}
+    .tournament{
+      border-top:4px solid var(--blue);
+    }
+    .tournament .date{color:var(--accent);font-weight:800;font-size:.9rem}
+    .tournament .location{color:var(--muted);margin:8px 0}
+    .team{
+      text-align:center;
+      padding:28px 18px;
+    }
+    .team-badge{
+      width:70px;height:70px;border-radius:50%;
+      background:#e9f2fb;
+      color:var(--blue);
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 15px;
+      font-weight:800;font-size:1.2rem;
+    }
+    .team p{margin-top:5px}
+    .callout{
+      background:var(--navy);
+      color:#fff;
+      border-radius:18px;
+      padding:40px;
+    }
+    .callout h2{margin-bottom:10px}
+    .callout p{color:#d9e7f3;max-width:760px}
+    .button{
+      display:inline-block;
+      margin-top:22px;
+      background:var(--blue);
+      color:#fff;
+      padding:12px 20px;
+      border-radius:8px;
+      font-weight:800;
+    }
+    .button:hover{opacity:.9}
+    .table-wrap{
+      overflow-x:auto;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    table{width:100%;border-collapse:collapse;min-width:720px}
+    th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--border)}
+    th{background:#edf4fa;color:var(--navy)}
+    tr:last-child td{border-bottom:0}
+    .province-name{font-weight:700;color:var(--navy)}
+    .cta{
+      text-align:center;
+      background:#f7fbff;
+    }
+    footer{
+      background:#0b2033;
+      color:#d9e7f3;
+      padding:55px 0 25px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:35px;
+      margin-bottom:35px;
+    }
+    footer h3,footer h4{color:#fff;margin-bottom:12px}
+    footer p,footer li{font-size:.92rem;color:#b8cddd}
+    footer ul{list-style:none}
+    footer li{margin:7px 0}
+    footer a:hover{color:#fff}
+    .copyright{
+      border-top:1px solid rgba(255,255,255,.15);
+      padding-top:20px;
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      flex-wrap:wrap;
+      font-size:.85rem;
+    }
+    @media(max-width:900px){
+      .stats{grid-template-columns:repeat(3,1fr)}
+      .grid,.grid-4{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+      .nav{align-items:flex-start;padding:16px 0;flex-direction:column}
+    }
+    @media(max-width:600px){
+      .hero{padding:65px 0 50px}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .grid,.grid-4{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      section{padding:55px 0}
+      .callout{padding:28px 22px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#">Spring<span>Hockey.ca</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#regions">Regions</a>
+      <a href="#tournaments">Tournaments</a>
+      <a href="#teams">Teams</a>
+      <a href="#provinces">Provinces</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="eyebrow">Preparing for Spring 2027</div>
+      <h1>Spring Hockey in Canada, in one place.</h1>
+      <p>
+        Free to search. Free to list your team. Constantly updated with new teams,
+        tournaments, and season information.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><strong>77</strong><span>Teams</span></div>
+        <div class="stat"><strong>76</strong><span>Tournaments</span></div>
+        <div class="stat"><strong>261</strong><span>Hockey Camps</span></div>
+        <div class="stat"><strong>317</strong><span>Rinks</span></div>
+        <div class="stat"><strong>167</strong><span>Cities</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <h2>New to Spring Hockey?</h2>
+        <p>Everything families need to understand Spring Hockey and prepare for the season.</p>
+      </div>
+      <div class="card">
+        <h3>Spring Hockey, explained</h3>
+        <p>
+          Spring Hockey is competitive ice hockey played from mid-March through June,
+          picking up once spring break and the winter season have wrapped up.
+          Unlike winter minor hockey, it's privately run. Teams, tryouts, and tournaments
+          are organized independently, and players are chosen on ability rather than
+          registration order.
+        </p>
+        <p style="margin-top:14px">
+          Most programs hold tryouts in the late fall or early in the new year and set
+          their own fees. A season usually runs $600–1,200. Players are grouped by birth
+          year, and Spring Hockey can provide additional ice time, development,
+          tougher competition, and the opportunity to meet players from outside a
+          normal winter association.
+        </p>
+        <ul class="guide-list">
+          <li>What Is Spring Hockey? A Parent's Guide to How It Actually Works</li>
+          <li>How Spring Hockey Tryouts Work: Timelines, Registration and Offers</li>
+          <li>How to Start Your Own Spring Hockey Team</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="callout">
+        <h2>FREE TRYOUT ALERTS</h2>
+        <p>
+          Be first to hear about Spring 2027 tryouts. Tell us your player's birth year
+          and region and we'll email you when tryouts, teams, camps, and tournaments open near you.
+        </p>
+        <a class="button" href="mailto:springblasttournamentsburnaby@gmail.com?subject=Spring%202027%20Tryout%20Alerts">GET FREE ALERTS</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="regions">
+    <div class="container">
+      <div class="section-head">
+        <h2>Browse by geography</h2>
+        <p>Find Spring Hockey where you live. Regional coverage will continue to grow across Canada.</p>
+      </div>
+      <div class="grid">
+        <div class="card region-card">
+          <div class="province">British Columbia</div>
+                    <img class="region-image" src="images/01_Lower_Mainland_British_Columbia.jpg" alt="Lower Mainland, British Columbia" loading="lazy">
+          <h3>Lower Mainland</h3>
+          <div class="cities">Vancouver • Richmond • Burnaby • Coquitlam • Langley</div>
+          <a class="link" href="#contact">View Lower Mainland →</a>
+        </div>
+        <div class="card region-card">
+          <div class="province">Alberta</div>
+                    <img class="region-image" src="images/02_Calgary_Area_Alberta.jpg" alt="Calgary Area, Alberta" loading="lazy">
+          <h3>Calgary Area</h3>
+          <div class="cities">Calgary • Airdrie • Okotoks • Banff • Cochrane</div>
+          <a class="link" href="#contact">View Calgary Area →</a>
+        </div>
+        <div class="card region-card">
+          <div class="province">Alberta</div>
+                    <img class="region-image" src="images/03_Edmonton_Area_Alberta.jpg" alt="Edmonton Area, Alberta" loading="lazy">
+          <h3>Edmonton Area</h3>
+          <div class="cities">Edmonton • Spruce Grove • Leduc • Sherwood Park • Fort Saskatchewan</div>
+          <a class="link" href="#contact">View Edmonton Area →</a>
+        </div>
+        <div class="card region-card">
+          <div class="province">Ontario</div>
+                    <img class="region-image" src="images/04_Greater_Toronto_Area_Ontario.jpg" alt="Greater Toronto Area, Ontario" loading="lazy">
+          <h3>Greater Toronto Area</h3>
+          <div class="cities">Toronto • Burlington • Oakville • Mississauga • Richmond Hill</div>
+          <a class="link" href="#contact">View Greater Toronto Area →</a>
+        </div>
+        <div class="card region-card">
+          <div class="province">British Columbia</div>
+                    <img class="region-image" src="images/05_South_Okanagan_British_Columbia.jpg" alt="South Okanagan, British Columbia" loading="lazy">
+          <h3>South Okanagan</h3>
+          <div class="cities">Penticton • Osoyoos • Summerland</div>
+          <a class="link" href="#contact">View South Okanagan →</a>
+        </div>
+        <div class="card region-card">
+          <div class="province">Across Canada</div>
+          <h3>Browse all regions</h3>
+          <div class="cities">New regions and cities join the directory as coverage grows across the country.</div>
+          <a class="link" href="#provinces">All regions and cities →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tournaments">
+    <div class="container">
+      <div class="section-head">
+        <h2>Featured Tournaments</h2>
+        <p>Spring Hockey tournaments across Canada. Confirmed dates can be added as events are published.</p>
+      </div>
+      <div class="grid">
+        <div class="card tournament">
+          <div class="date">MAR 19–21, 2027</div>
+          <h3>MGHL Winter Classic, Winter "AA" Showcase & Spring Surge</h3>
+          <div class="location">Mississauga, ON • Greater Toronto Area</div>
+          <p>Iceland Mississauga</p>
+        </div>
+        <div class="card tournament">
+          <div class="date">MAR 20, 2027</div>
+          <h3>Quebec International Pee-Wee Hockey Tournament</h3>
+          <div class="location">Québec, QC • Quebec City Area</div>
+          <p>Videotron Center</p>
+        </div>
+        <div class="card tournament">
+          <div class="date">MAR 26–28, 2027</div>
+          <h3>3 on 3 Iceberg Classic</h3>
+          <div class="location">Medicine Hat, AB • Southern Alberta</div>
+          <p>Spring tournament listing</p>
+        </div>
+        <div class="card tournament">
+          <div class="date">APR 1–4, 2027</div>
+          <h3>Spring Kick Off Tournament</h3>
+          <div class="location">Chilliwack, BC • Fraser Valley</div>
+          <p>Spring tournament listing</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="teams">
+    <div class="container">
+      <div class="section-head">
+        <h2>Featured Teams</h2>
+        <p>Who's playing Spring 2027. Each listed team can have its own free directory page.</p>
+      </div>
+      <div class="grid grid-4">
+        <div class="card team"><div class="team-badge">BC</div><h3>BC Kodiaks</h3><p>Richmond, BC</p></div>
+        <div class="card team"><div class="team-badge">BC</div><h3>BC Selects</h3><p>Richmond, BC</p></div>
+        <div class="card team"><div class="team-badge">CC</div><h3>Cowichan Capitals Spring Hockey</h3><p>Duncan, BC</p></div>
+        <div class="card team"><div class="team-badge">FV</div><h3>Fraser Valley Knights</h3><p>Chilliwack, BC</p></div>
+        <div class="card team"><div class="team-badge">JR</div><h3>Jr. Royals</h3><p>Victoria, BC</p></div>
+        <div class="card team"><div class="team-badge">JS</div><h3>Junior Smoke Eaters</h3><p>Trail, BC</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="callout">
+        <h2>Is your team listed?</h2>
+        <p>
+          Your team can be added to the directory. Claiming a listing can help coaches,
+          parents and players find current team information.
+        </p>
+        <a class="button" href="mailto:springblasttournamentsburnaby@gmail.com?subject=Spring%20Hockey%20Team%20Listing">Manage or list your team</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="provinces">
+    <div class="container">
+      <div class="section-head">
+        <h2>Spring Hockey by Province</h2>
+        <p>We started in British Columbia and are expanding province by province. Counts can be updated as coverage grows.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Province / Territory</th>
+              <th>Coverage</th>
+              <th>Teams</th>
+              <th>Tournaments</th>
+              <th>Rinks</th>
+              <th>Camps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="province-name">British Columbia</td><td>39</td><td>19</td><td>66</td><td>64</td><td>—</td></tr>
+            <tr><td class="province-name">Alberta</td><td>13</td><td>15</td><td>55</td><td>40</td><td>—</td></tr>
+            <tr><td class="province-name">Ontario</td><td>16</td><td>23</td><td>103</td><td>83</td><td>—</td></tr>
+            <tr><td class="province-name">Quebec</td><td>0</td><td>7</td><td>49</td><td>40</td><td>—</td></tr>
+            <tr><td class="province-name">Manitoba</td><td>3</td><td>3</td><td>15</td><td>8</td><td>—</td></tr>
+            <tr><td class="province-name">Saskatchewan</td><td>3</td><td>4</td><td>12</td><td>15</td><td>—</td></tr>
+            <tr><td class="province-name">Nova Scotia</td><td>1</td><td>1</td><td>2</td><td>0</td><td>—</td></tr>
+            <tr><td class="province-name">New Brunswick</td><td>1</td><td>0</td><td>5</td><td>4</td><td>—</td></tr>
+            <tr><td class="province-name">Newfoundland and Labrador</td><td>0</td><td>3</td><td>4</td><td>0</td><td>—</td></tr>
+            <tr><td class="province-name">Prince Edward Island</td><td>0</td><td>1</td><td>2</td><td>3</td><td>—</td></tr>
+            <tr><td class="province-name">Northwest Territories</td><td>0</td><td>0</td><td>1</td><td>2</td><td>—</td></tr>
+            <tr><td class="province-name">Yukon</td><td>1</td><td>0</td><td>3</td><td>2</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="section-head">
+        <h2>Find your Spring Hockey team</h2>
+        <p>
+          Everything in the directory is filed by the region it plays in.
+          Start with your province or region as the directory expands.
+        </p>
+      </div>
+      <a class="button" href="#regions">Browse by region</a>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>SpringHockey.ca</h3>
+        <p>
+          Helping Canadian families find Spring Hockey teams, tournaments,
+          camps, and rinks across the country. A growing directory updated
+          as programs publish each season.
+        </p>
+      </div>
+      <div>
+        <h4>Provinces</h4>
+        <ul>
+          <li><a href="#provinces">British Columbia</a></li>
+          <li><a href="#provinces">Alberta</a></li>
+          <li><a href="#provinces">Ontario</a></li>
+          <li><a href="#provinces">Quebec</a></li>
+          <li><a href="#provinces">Saskatchewan</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Discover</h4>
+        <ul>
+          <li><a href="#regions">All regions</a></li>
+          <li><a href="#about">How it works</a></li>
+          <li><a href="#tournaments">Tournaments</a></li>
+          <li><a href="#about">Guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For teams</h4>
+        <ul>
+          <li><a href="mailto:springblasttournamentsburnaby@gmail.com?subject=List%20My%20Team">List Your Team — Free</a></li>
+          <li><a href="mailto:springblasttournamentsburnaby@gmail.com?subject=Team%20Login">Team login</a></li>
+          <li><a href="mailto:springblasttournamentsburnaby@gmail.com?subject=Report%20a%20Correction">Report a correction</a></li>
+          <li><a href="mailto:springblasttournamentsburnaby@gmail.com?subject=Report%20an%20Issue">Report an issue</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <span>© 2024 SpringHockey.ca · Free to search. Free to list your team.</span>
+      <span>Contact: <a href="mailto:springblasttournamentsburnaby@gmail.com">springblasttournamentsburnaby@gmail.com</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
